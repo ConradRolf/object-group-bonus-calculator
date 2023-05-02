@@ -30,6 +30,7 @@ const employees = [
     annualSalary: '35000',
     reviewRating: 1
   }
+
 ];
 
 console.log('array of employee data: ',  employees );
@@ -48,19 +49,17 @@ console.log('array of employee data: ',  employees );
 
 // This function will calculate 1 employee's bonus!
 //
-function calculateIndividualEmployeeBonus( employee ) { 
+function calculateIndividualEmployeeBonus() { 
   const employeeBonus = {
-    name: employee,
+    name: employees[i].name,
     bonusPercentage: '0%',
     totalCompensation: 0,
     totalBonus: 0
   }; 
   // your logic here
-  for (let i = 0; i<employees.length; i++){//loop thru employees array
     
-    if (employees[i].name===employee){//matching the name given to the name in the array.
       if(employees[i].reviewRating <= 2){
-        employeeBonus.totalCompensation = employees[i].annualSalary;
+        employeeBonus.totalCompensation = Number(employees[i].annualSalary);
       } else if(Number(employees[i].annualSalary) > 65000){
           employeeBonus.totalBonus = .01 * employees[i].annualSalary;
             employeeBonus.bonusPercentage = '1%';
@@ -93,20 +92,20 @@ function calculateIndividualEmployeeBonus( employee ) {
             employeeBonus.totalCompensation=Number(employees[i].annualSalary)+employeeBonus.totalBonus;
           }
         }
-    }
-  }
+    
+
   
   // return new object with bonus results
   console.log(employeeBonus);
-  return employeeBonus;
 
 }
 
-calculateIndividualEmployeeBonus('Atticus');
-calculateIndividualEmployeeBonus('Jem');
-calculateIndividualEmployeeBonus('Scout');
-calculateIndividualEmployeeBonus('Robert');
-calculateIndividualEmployeeBonus('Mayella');
+
+for (i=0; i<employees.length; i++){
+
+calculateIndividualEmployeeBonus(employees[i]);
+}
+
 
 
 
