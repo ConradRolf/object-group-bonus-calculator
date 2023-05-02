@@ -49,10 +49,9 @@ console.log('array of employee data: ',  employees );
 // This function will calculate 1 employee's bonus!
 //
 function calculateIndividualEmployeeBonus( employee ) { 
-  let bonus= 0;
   const employeeBonus = {
     name: employee,
-    bonusPercentage: 0,
+    bonusPercentage: '0%',
     totalCompensation: 0,
     totalBonus: 0
   }; 
@@ -60,12 +59,12 @@ function calculateIndividualEmployeeBonus( employee ) {
   for (let i = 0; i<employees.length; i++){//loop thru employees array
     
     if (employees[i].name===employee){//matching the name given to the name in the array.
-      if(Number(employees[i].annualSalary) > 65000){
-        employeeBonus.totalBonus = .01 * employees[i].annualSalary;
+      if(employees[i].reviewRating <= 2){
+        employeeBonus.totalCompensation = employees[i].annualSalary;
+      } else if(Number(employees[i].annualSalary) > 65000){
+          employeeBonus.totalBonus = .01 * employees[i].annualSalary;
             employeeBonus.bonusPercentage = '1%';
             employeeBonus.totalCompensation=Number(employees[i].annualSalary)+employeeBonus.totalBonus;
-        }if(employees[i].reviewRating <= 2){
-          console.log (employees[i].name,'has a rating too low for bonus');
         } else if (employees[i].reviewRating === 3){
             employeeBonus.totalBonus = .04 * employees[i].annualSalary;
             employeeBonus.bonusPercentage = '4%';
@@ -75,13 +74,24 @@ function calculateIndividualEmployeeBonus( employee ) {
               employeeBonus.bonusPercentage = '9%';
               employeeBonus.totalCompensation=Number(employees[i].annualSalary)+employeeBonus.totalBonus;
             }
-            console.log(employeeBonus);
         } else if (employees[i].reviewRating === 4){
-            bonus = .06 * employees[i].annualSalary;
-            console.log(employees[i].name,'received a', bonus, 'dollar bonus');
+          employeeBonus.totalBonus = .06 * employees[i].annualSalary;
+          employeeBonus.bonusPercentage = '6%';
+          employeeBonus.totalCompensation=Number(employees[i].annualSalary)+employeeBonus.totalBonus;
+          if(employees[i].employeeNumber.length === 4){
+            employeeBonus.totalBonus+=employees[i].annualSalary*.05;
+            employeeBonus.bonusPercentage = '11%';
+            employeeBonus.totalCompensation=Number(employees[i].annualSalary)+employeeBonus.totalBonus;
+          }
         } else if (employees[i].reviewRating === 5){
-            bonus = .10 * employees[i].annualSalary;
-            console.log(employees[i].name,'received a', bonus, 'dollar bonus');
+          employeeBonus.totalBonus = .10 * employees[i].annualSalary;
+          employeeBonus.bonusPercentage = '10%';
+          employeeBonus.totalCompensation=Number(employees[i].annualSalary)+employeeBonus.totalBonus;
+          if(employees[i].employeeNumber.length === 4){
+            employeeBonus.totalBonus+=employees[i].annualSalary*.03;
+            employeeBonus.bonusPercentage = '13%';
+            employeeBonus.totalCompensation=Number(employees[i].annualSalary)+employeeBonus.totalBonus;
+          }
         }
     }
   }
@@ -93,10 +103,10 @@ function calculateIndividualEmployeeBonus( employee ) {
 }
 
 calculateIndividualEmployeeBonus('Atticus');
-// calculateIndividualEmployeeBonus('Jem');
-// calculateIndividualEmployeeBonus('Scout');
-// calculateIndividualEmployeeBonus('Robert');
-// calculateIndividualEmployeeBonus('Mayella');
+calculateIndividualEmployeeBonus('Jem');
+calculateIndividualEmployeeBonus('Scout');
+calculateIndividualEmployeeBonus('Robert');
+calculateIndividualEmployeeBonus('Mayella');
 
 
 
