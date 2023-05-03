@@ -33,7 +33,7 @@ const employees = [
 
 ];
 
-console.log('array of employee data: ',  employees );
+// console.log('array of employee data: ',  employees );
 
 
 // YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT
@@ -96,30 +96,57 @@ function calculateIndividualEmployeeBonus() {
 
   
   // return new object with bonus results
-  console.log(employeeBonus);
+  // console.log(employeeBonus);
 
 }
 
 
-for (i=0; i<employees.length; i++){
+// for (i=0; i<employees.length; i++){
 
-calculateIndividualEmployeeBonus(employees[i]);
-}
-
-
-
-
-// for (employee of employees){//loop thru array of employees
-//   if(employee.reviewRating <= 2){
-//     console.log (employee.name,'has a rating too low for bonus');
-//   } else if (employee.reviewRating === 3){
-//     bonus = .04 * employee.annualSalary;
-//     console.log(employee.name,'received a', bonus, 'dollar bonus');
-//   } else if (employee.reviewRating === 4){
-//     bonus = .06 * employee.annualSalary;
-//     console.log(employee.name,'received a', bonus, 'dollar bonus');
-//   } else if (employee.reviewRating === 5){
-//     bonus = .10 * employee.annualSalary;
-//     console.log(employee.name,'received a', bonus, 'dollar bonus');
-//   }
+// calculateIndividualEmployeeBonus(employees[i]);
 // }
+
+function calculateBonus() {
+  const employeeBonus = {
+    name: employees[i].name,
+    bonusPercentage: 0,
+    totalCompensation: 0,
+    totalBonus: 0
+  }
+  if (employees[i].reviewRating <= 2) {
+    employeeBonus.bonusPercentage = 0.0
+  }
+    else if (employees[i].reviewRating === 3) {
+    employeeBonus.bonusPercentage = 0.04
+  }
+    else if (employees[i].reviewRating === 4) {
+    employeeBonus.bonusPercentage = 0.06
+  }
+    else if (employees[i].reviewRating === 5) {
+    employeeBonus.bonusPercentage = 0.10
+  }
+  if (employees[i].employeeNumber.length < 5 && employees[i].reviewRating > 2) {
+    employeeBonus.bonusPercentage += 0.05
+  }
+  if (Number(employees[i].annualSalary) > 65000 && employees[i].reviewRating > 2) {
+    employeeBonus.bonusPercentage -= 0.01
+  }
+  if (employeeBonus.bonusPercentage > 0.13) {
+    employeeBonus.bonusPercentage = 0.13
+  } 
+
+  employeeBonus.totalBonus = Math.round(Number(employees[i].annualSalary) * employeeBonus.bonusPercentage)
+  employeeBonus.totalCompensation = Math.round(employeeBonus.totalBonus + Number(employees[i].annualSalary))
+
+  console.log(employeeBonus.name, 'has a bonus percentage of', employeeBonus.bonusPercentage.toString() + '%', 'which gives them a total bonus of',
+  '$' + employeeBonus.totalBonus.toString(), 'and a total compensation of', '$' + employeeBonus.totalCompensation.toString(), 'for the year.')
+ 
+  document.write(employeeBonus.name, ' has a bonus percentage of ', employeeBonus.bonusPercentage.toString() + '%', ' which gives them a total bonus of ',
+   '$' + employeeBonus.totalBonus.toString(), ' and a total compensation of ', '$' + employeeBonus.totalCompensation.toString(), ' for the year. ')
+}
+
+function runCode(){
+for (i=0; i<employees.length; i++) {
+  calculateBonus(employees[i]);
+}
+}
